@@ -9,7 +9,7 @@ from lib.utils import fix_torch_seed, get_torch_device
 from lib.models.base import RecommenderModel
 from lib.models.learning import trainer
 from lib.evaluation import Evaluator
-from lib.manifold import pairseq_dist_affinity, project_embeddings,estimate_curvature_SVD
+from lib.manifold import hyperbolic_dist, pairseq_dist_affinity, project_embeddings,estimate_curvature_SVD
 
 
 
