@@ -39,7 +39,7 @@ def import_model_routine(model_name: str, name: str) -> Callable[..., None]:
 
 def train_data_format(model_name):
     sparse = ['svd', 'random', 'mostpop']
-    sequential_packed = ['sasrec', 'sasrecb', 'hypsasrec', 'hypsasrecb','sasrec_manifold']
+    sequential_packed = ['sasrec', 'sasrecb', 'hypsasrec', 'hypsasrecb','sasrec_manifold','sasrecb_manifold']
     sequential = []
     sequential_typed = []
     if model_name in sparse:
