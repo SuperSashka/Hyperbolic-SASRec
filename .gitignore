@@ -1,0 +1,4 @@
+.vs
+*.pyc
+*.txt
+data/raw/*
