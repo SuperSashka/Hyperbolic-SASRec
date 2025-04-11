@@ -30,8 +30,10 @@ trial_params = dict(
     #neg_lambda_reg = [1e-5,1e-4,1e-3,5e-3,1e-2,5e-2,0.1],
     #num_items_sampled = [10,20,30,40,50,60,70,80,90,100]
     pos_lambda_reg = [1e-6,1e-5,1e-4],
+    #pos_lambda_reg = [1e-5],
     geometry_c = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0],
-    num_items_sampled = [50]
+    #geometry_c = [0.8],
+    num_items_sampled = [200]
 )
 
 fixed_params = dict(
@@ -45,9 +47,10 @@ fixed_params = dict(
     device = None,
     max_epochs = 400,
     batch_size = 128,
-    learning_rate = 0.0005,
-    hidden_units = 128,
-    num_blocks = 3,
-    dropout_rate = 0.4
+    learning_rate = 0.005,
+    hidden_units = 32,
+    num_blocks = 2,
+    dropout_rate = 0.2
     # step_replacement = None, # during tests, max value will be replaced with an optimal one
 )
+

@@ -27,9 +27,13 @@ def parse_args(is_test=False):
     #args = parser.parse_args(['--model','sasrec','--dataset','ml-1m','--time_offset','0.95','--config_path','./grids/sasrec.py', '--grid_steps', '60','--dump_results'])
     #args = parser.parse_args(['--model','hypsasrec','--dataset','ml-1m','--time_offset','0.95','--config_path','./grids/hypsasrec_ML1M_SVD_e-5.py', '--grid_steps', '60','--dump_results'])
     #args = parser.parse_args(['--model','sasrec_manifold','--dataset','ml-1m','--time_offset','0.95','--config_path','./grids/sasrec_manifold.py', '--grid_steps', '60','--dump_results'])
-    args = parser.parse_args(['--model','sasrecb_manifold','--dataset','ml-1m','--time_offset','0.95','--config_path','./grids/sasrecb_manifold.py', '--grid_steps', '60','--dump_results'])
+    #args = parser.parse_args(['--model','sasrecb_manifold','--dataset','ml-1m','--time_offset','0.95','--config_path','./grids/sasrecb_manifold.py', '--grid_steps', '60','--dump_results'])
     #args = parser.parse_args(['--model','sasrecb','--dataset','ml-1m','--time_offset','0.95','--config_path','./grids/sasrec.py', '--grid_steps', '60','--dump_results'])
     #args = parser.parse_args(['--model','hypsasrecb','--dataset','ml-1m','--time_offset','0.95','--config_path','./grids/hypsasrec_ML1M_SVD_e-5.py', '--grid_steps', '60','--dump_results'])
+    #args = parser.parse_args(['--model','sasrec','--dataset','ml-1m','--time_offset','0.95','--config_path','./grids/sasrec.py', '--grid_steps', '60','--dump_results'])
+    #args = parser.parse_args(['--model','hypsasrec','--dataset','Digital_Music','--time_offset','0.95','--config_path','./grids/hypsasrec_Digital_Music.py', '--grid_steps', '60','--dump_results'])
+    #args = parser.parse_args(['--model','sasrec','--dataset','Digital_Music','--time_offset','0.95','--config_path','./grids/sasrec.py', '--grid_steps', '60','--dump_results'])
+    args = parser.parse_args(['--model','sasrecb_manifold','--dataset','Digital_Music','--time_offset','0.95','--config_path','./grids/sasrecb_manifold_Digital_Music.py', '--grid_steps', '60','--dump_results'])
     validate_args(args, is_test)
     return args
 

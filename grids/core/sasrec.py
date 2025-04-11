@@ -1,5 +1,6 @@
 trial_params = dict(
-    batch_size = [128, 256, 512],
+    #batch_size = [128, 256, 512],
+    batch_size = [128],
     learning_rate = [0.005, 0.001, 0.0005],
     hidden_units = [32, 64, 128, 256, 512],
     num_blocks = [1, 2, 3],
