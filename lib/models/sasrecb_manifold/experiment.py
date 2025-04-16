@@ -94,9 +94,9 @@ class SASRecCEModel(RecommenderModel):
 
 
 
-            pos_lambda_man_reg = self.config['pos_lambda_reg']
+            lambda_man_reg = self.config['lambda_reg']
 
-            if pos_lambda_man_reg > 0:
+            if lambda_man_reg > 0:
                 with torch.amp.autocast('cuda'):
                     idx_samples = torch.randint(0, self.config['maxlen'], (self.config['num_items_sampled'],), device=inputs.device)
                     inp_sub = inputs[:, idx_samples]
@@ -117,8 +117,8 @@ class SASRecCEModel(RecommenderModel):
                 man_reg=torch.tensor(0)
 
 
-            if pos_lambda_man_reg > 0:
-                batch_loss += pos_lambda_man_reg*man_reg
+            if lambda_man_reg > 0:
+                batch_loss += lambda_man_reg*man_reg
             #print('emb pos norms = {:.4f} emb neg norms = {:.4f} loss = {:.4f} pos_reg = {:.4f} neg_reg = {:.4f}'.format(torch.mean(torch.linalg.norm(pos_eseq,dim=-1),dim=-1).mean(),torch.mean(torch.linalg.norm(neg_eseq,dim=-1),dim=-1).mean(),criterion(pos_logits[indices], pos_labels[indices])+criterion(neg_logits[indices], neg_labels[indices]),pos_lambda_man_reg*pos_man_reg,neg_lambda_man_reg*neg_man_reg))
             
             

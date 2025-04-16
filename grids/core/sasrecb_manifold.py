@@ -29,28 +29,24 @@ trial_params = dict(
     #pos_lambda_reg = [1e-5,1e-4,1e-3,5e-3,1e-2,5e-2,0.1],
     #neg_lambda_reg = [1e-5,1e-4,1e-3,5e-3,1e-2,5e-2,0.1],
     #num_items_sampled = [10,20,30,40,50,60,70,80,90,100]
-    pos_lambda_reg = [1e-6,1e-5,1e-4],
-    #pos_lambda_reg = [1e-5],
-    geometry_c = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0],
-    #geometry_c = [0.8],
-    num_items_sampled = [200]
+    lambda_reg = [1e-6,1e-5,1e-4,1e-3],
 )
 
 fixed_params = dict(
-    neg_lambda_reg = 0,
-    num_heads = 1,
-    l2_emb = 0.0,
-    maxlen = None,
-    batch_quota = None,
-    seed = 0,
-    sampler_seed = 789,
-    device = None,
-    max_epochs = 400,
-    batch_size = 128,
-    learning_rate = 0.005,
-    hidden_units = 32,
-    num_blocks = 2,
-    dropout_rate = 0.2
+        num_items_sampled = 200,
+        batch_size=128,
+        learning_rate=0.005,
+        hidden_units=32,
+        num_blocks=3,
+        dropout_rate=0.2,
+        num_heads=1,
+        l2_emb=0.0,
+        maxlen=200,
+        batch_quota=None,
+        seed=0,
+        sampler_seed=789,
+        device="cuda",
+        max_epochs=400,
+        geometry_c=1, 
     # step_replacement = None, # during tests, max value will be replaced with an optimal one
 )
-
