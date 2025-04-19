@@ -36,7 +36,7 @@ if __name__ == '__main__':
     parser.add_argument('--dataset', required=True, type=str)
     parser.add_argument('--time_offset', default=0.95, type=float)
     parser.add_argument('--nsamples', nargs='*', type=int, default=[500, 1000, 1500, 2000, 2500, 3000, 4000])
-    parser.add_argument('--ranks', nargs='*', type=int, default=[32, 64, 128, 256, 512, 768, 1024, 1536, 2048, 3072, 4096])
+    parser.add_argument('--ranks', nargs='*', type=int, default=[32, 64, 128, 256, 512, 768, 1024])
     parser.add_argument('--ntrials', default=48, type=int)
     parser.add_argument('--seed', default=None, type=int)
     parser.add_argument('--full_matrix', default=False, action="store_true")

@@ -10,8 +10,8 @@ from lib import defaults
 from .tools import pcore_filter
 
 
-BASE_URL = 'https://jmcauley.ucsd.edu/data/amazon_v2/categoryFilesSmall'
-BASE_URL_ALT = 'https://jmcauley.ucsd.edu/data/amazon_v2/categoryFiles'
+BASE_URL = 'https://mcauleylab.ucsd.edu/public_datasets/data/amazon_v2/categoryFilesSmall/'
+BASE_URL_ALT = 'https://mcauleylab.ucsd.edu/public_datasets/data/amazon_v2/categoryFiles'
 DATASETS = set([
     'AMAZON_FASHION',
     'All_Beauty',

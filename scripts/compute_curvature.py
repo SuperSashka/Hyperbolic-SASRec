@@ -18,7 +18,7 @@ from lib.embed import get_item_representations
 import json
 
 # Read the file
-with open('data/results/delta_ml-1m_17-04-2025_21-00-45.txt', 'r') as file:
+with open('data/results/delta_Digital_Music_18-04-2025_03-26-09.txt', 'r') as file:
     data = json.load(file)  # Parse the JSON array into a Python list of dictionaries
 
 curv = []

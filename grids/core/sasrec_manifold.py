@@ -25,6 +25,9 @@
 
 
 
+from tkinter import N
+
+
 trial_params = dict(
     #pos_lambda_reg = [1e-5,1e-4,1e-3,5e-3,1e-2,5e-2,0.1],
     #neg_lambda_reg = [1e-5,1e-4,1e-3,5e-3,1e-2,5e-2,0.1],
@@ -34,20 +37,21 @@ trial_params = dict(
 )
 
 fixed_params = dict(
-        num_items_sampled = 200,
+        num_items_sampled = 50,
         batch_size=128,
-        learning_rate=0.005,
-        hidden_units=32,
-        num_blocks=3,
-        dropout_rate=0.2,
+        learning_rate=0.001,
+        hidden_units=256,
+        num_blocks=1,
+        dropout_rate=0.6,
         num_heads=1,
         l2_emb=0.0,
-        maxlen=200,
+        maxlen=50,
         batch_quota=None,
         seed=0,
         sampler_seed=789,
         device="cuda",
         max_epochs=400,
-        geometry_c=1, # obtained from SVD embeddings at 1e^{-12} tolerance
+        geometry_c = 0.16701570399268528,  # obtained from SVD embeddings at 1e^{-12} tolerance
+        geom = 'ball' # obtained from SVD embeddings at 1e^{-12} tolerance
     # step_replacement = None, # during tests, max value will be replaced with an optimal one
 )

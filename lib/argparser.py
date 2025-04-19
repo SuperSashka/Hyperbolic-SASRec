@@ -37,8 +37,10 @@ def parse_args(is_test=False):
     #args = parser.parse_args(['--model','sasrec','--dataset','ml-1m','--time_offset','0.95','--config_path','./grids/best/sasrec_ml1m.py','--dump_results'])
     #args = parser.parse_args(['--model','sasrec','--dataset','Digital_Music','--time_offset','0.95','--config_path','./grids/sasrec.py', '--grid_steps', '60','--dump_results'])
     #args = parser.parse_args(['--model','hypsasrecb','--dataset','Digital_Music','--time_offset','0.95','--config_path','./grids/hypsasrec.py', '--grid_steps', '60','--dump_results'])
-    #args = parser.parse_args(['--model','sasrec_manifold','--dataset','Digital_Music','--time_offset','0.95','--config_path','./grids/sasrec_manifold_Digital_Music.py', '--grid_steps', '5','--dump_results'])
-    args = parser.parse_args(['--model','sasrec','--dataset','Digital_Music','--time_offset','0.95','--config_path','./grids/sasrec.py','--dump_results'])
+    #args = parser.parse_args(['--model','sasrec','--dataset','Digital_Music','--time_offset','0.95','--config_path','./grids/sasrec.py','--dump_results'])
+    args = parser.parse_args(['--model','sasrec_manifold','--dataset','Digital_Music','--time_offset','0.95','--config_path','./grids/sasrec_manifold.py', '--grid_steps', '0','--dump_results'])
+    #args = parser.parse_args(['--model','sasrec','--dataset','Digital_Music','--time_offset','0.95','--config_path','./grids/best/sasrec_Digital_Music.py','--dump_results'])
+    #args = parser.parse_args(['--model','hypsasrecb','--dataset','Digital_Music','--time_offset','0.95','--config_path','./grids/best/sasrec_Digital_Music.py','--dump_results'])
     validate_args(args, is_test)
     return args
 
