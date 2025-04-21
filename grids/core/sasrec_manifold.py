@@ -37,10 +37,9 @@ trial_params = dict(
 )
 
 fixed_params = dict(
-        num_items_sampled = 50,
         batch_size=128,
-        learning_rate=0.001,
-        hidden_units=256,
+        learning_rate=0.005,
+        hidden_units=32,
         num_blocks=1,
         dropout_rate=0.6,
         num_heads=1,
@@ -51,7 +50,6 @@ fixed_params = dict(
         sampler_seed=789,
         device="cuda",
         max_epochs=400,
-        geometry_c = 0.16701570399268528,  # obtained from SVD embeddings at 1e^{-12} tolerance
-        geom = 'ball' # obtained from SVD embeddings at 1e^{-12} tolerance
+        c=0.052206364464335075
     # step_replacement = None, # during tests, max value will be replaced with an optimal one
 )

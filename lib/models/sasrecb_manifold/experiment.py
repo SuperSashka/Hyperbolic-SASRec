@@ -77,7 +77,7 @@ class SASRecCEModel(RecommenderModel):
         loss = 0
         model.train()
 
-        single_dist = lambda u,v: hyperbolic_dist(u,v, c = self.config['geometry_c'])
+        single_dist = lambda u,v: hyperbolic_dist(u,v, c = self.config['c'])
 
         for index in range(n_batches):
             _, inputs, target, _ = next(sampler)
@@ -96,9 +96,14 @@ class SASRecCEModel(RecommenderModel):
 
             lambda_man_reg = self.config['lambda_reg']
 
+            try:
+                n_items_sampled = self.config['num_items_sampled']
+            except Exception:
+                n_items_sampled = self.config['maxlen']
+
             if lambda_man_reg > 0:
                 with torch.amp.autocast('cuda'):
-                    idx_samples = torch.randint(0, self.config['maxlen'], (self.config['num_items_sampled'],), device=inputs.device)
+                    idx_samples = torch.randint(0, self.config['maxlen'], (n_items_sampled,), device=inputs.device)
                     inp_sub = inputs[:, idx_samples]
 
                     inp_eseq = model.item_emb(inp_sub.detach())

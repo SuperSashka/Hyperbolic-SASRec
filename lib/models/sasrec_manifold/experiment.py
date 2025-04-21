@@ -1,4 +1,5 @@
 ﻿from functools import partial
+from math import exp
 
 import numpy as np
 import torch
@@ -61,7 +62,7 @@ class SASRecModel(RecommenderModel):
         loss = 0
         model.train()
 
-        single_dist = lambda u,v: hyperbolic_dist(u,v, c = self.config['geometry_c']) 
+        single_dist = lambda u,v: hyperbolic_dist(u,v, c = self.config['c']) 
 
         #clean_dist = lambda u,v: hyperbolic_dist(u,v, c = 1.0) 
 
@@ -83,10 +84,14 @@ class SASRecModel(RecommenderModel):
 
 
             pos_lambda_man_reg = self.config['pos_lambda_reg']
+            try:
+                n_items_sampled = self.config['num_items_sampled']
+            except Exception:
+                n_items_sampled = self.config['maxlen']
 
             if pos_lambda_man_reg > 0:
                 with torch.amp.autocast('cuda'):
-                    idx_samples = torch.randint(0, self.config['maxlen'], (self.config['num_items_sampled'],), device=pos.device)
+                    idx_samples = torch.randint(0, self.config['maxlen'], (n_items_sampled,), device=pos.device)
                     pos_sub = pos[:, idx_samples]
                     #pos_eseq = model.item_emb(pos)
 
@@ -108,7 +113,7 @@ class SASRecModel(RecommenderModel):
             if neg_lambda_man_reg > 0:
                 with torch.amp.autocast('cuda'):
 
-                    idx_samples = torch.randint(0, self.config['maxlen'], (self.config['num_items_sampled'],), device=pos.device)
+                    idx_samples = torch.randint(0, self.config['maxlen'], (n_items_sampled,), device=pos.device)
                     neg_sub = neg[:, idx_samples]
 
                     #neg_eseq = model.item_emb(neg)
@@ -142,7 +147,7 @@ class SASRecModel(RecommenderModel):
 
 
             for param in model.item_emb.parameters():
-                param.data = project_embeddings(param.data, c=self.config['geometry_c'], eps=1e-5)
+                param.data = project_embeddings(param.data, c=self.config['c'], eps=1e-5)
 
             loss += batch_loss.item()
 
