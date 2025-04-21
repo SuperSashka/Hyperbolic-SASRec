@@ -49,7 +49,8 @@ def parse_args(is_test=False):
     #args = parser.parse_args(['--model','sasrec_manifold','--dataset','Digital_Music_5','--time_offset','0.95','--config_path','./grids/best/sasrec_dig.py','--dump_results'])
     #args = parser.parse_args(['--model','sasrecb','--dataset','Digital_Music_5','--time_offset','0.95','--config_path','./grids/best/sasrec_dig.py','--dump_results'])
     #args = parser.parse_args(['--model','hypsasrec','--dataset','Digital_Music_5','--time_offset','0.95','--config_path','./grids/best/sasrec_dig.py','--dump_results'])
-    args = parser.parse_args(['--model','sasrecb_manifold','--dataset','Digital_Music_5','--time_offset','0.95','--config_path','./grids/best/sasrec_dig.py','--dump_results'])
+    #args = parser.parse_args(['--model','sasrecb_manifold','--dataset','Digital_Music_5','--time_offset','0.95','--config_path','./grids/best/sasrec_dig.py','--dump_results'])
+    args = parser.parse_args(['--model','sasrec_manifold','--dataset','Grocery_and_Gourmet_Food_5','--time_offset','0.95','--config_path','./grids/sasrec_manifold.py', '--grid_steps', '0','--dump_results'])
     validate_args(args, is_test)
     return args
 

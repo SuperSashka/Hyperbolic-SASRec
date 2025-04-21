@@ -38,9 +38,9 @@ trial_params = dict(
 
 fixed_params = dict(
         batch_size=128,
-        learning_rate=0.005,
-        hidden_units=32,
-        num_blocks=1,
+        learning_rate=0.0005,
+        hidden_units=256,
+        num_blocks=2,
         dropout_rate=0.6,
         num_heads=1,
         l2_emb=0.0,
@@ -50,6 +50,6 @@ fixed_params = dict(
         sampler_seed=789,
         device="cuda",
         max_epochs=400,
-        c=0.052206364464335075
+        c=0.04589246894247849
     # step_replacement = None, # during tests, max value will be replaced with an optimal one
 )
