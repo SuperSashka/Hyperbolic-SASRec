@@ -32,16 +32,16 @@ trial_params = dict(
     #pos_lambda_reg = [1e-5,1e-4,1e-3,5e-3,1e-2,5e-2,0.1],
     #neg_lambda_reg = [1e-5,1e-4,1e-3,5e-3,1e-2,5e-2,0.1],
     #num_items_sampled = [10,20,30,40,50,60,70,80,90,100]
-    pos_lambda_reg = [1e-6,1e-5,1e-4,1e-3],
-    neg_lambda_reg = [1e-6,1e-5,1e-4,1e-3],
+    pos_lambda_reg = [1e-8,5e-7,1e-7,5e-6,1e-6],
+    neg_lambda_reg = [1e-7,1e-6,1e-5,1e-4],
 )
 
 fixed_params = dict(
         batch_size=128,
         learning_rate=0.0005,
-        hidden_units=256,
-        num_blocks=2,
-        dropout_rate=0.6,
+        hidden_units=64,
+        num_blocks=3,
+        dropout_rate=0.4,
         num_heads=1,
         l2_emb=0.0,
         maxlen=50,
@@ -50,6 +50,6 @@ fixed_params = dict(
         sampler_seed=789,
         device="cuda",
         max_epochs=400,
-        c=0.04589246894247849
+        c=0.0408063380676231,
     # step_replacement = None, # during tests, max value will be replaced with an optimal one
 )

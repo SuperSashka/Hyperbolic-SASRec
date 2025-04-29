@@ -5,7 +5,7 @@ from grids.core import generate_best_config
 def generate_config(trial: optuna.Trial) -> dict:
 
     fixed_params = dict(
-        batch_size=512,
+        batch_size=128,
         learning_rate=0.005,
         hidden_units=64,
         num_blocks=2,
@@ -19,6 +19,11 @@ def generate_config(trial: optuna.Trial) -> dict:
         device="cuda",
         max_epochs=400,
         c=0.02890294854523254,  # obtained from SVD embeddings at 1e^{-12} tolerance
+        geom = 'ball',
+        bias = True,
+        pos_lambda_reg = 1e-06, 
+        neg_lambda_reg = 1e-05,
+        lambda_reg = 1e-08
     )
     config = generate_best_config(fixed_params)
     return config

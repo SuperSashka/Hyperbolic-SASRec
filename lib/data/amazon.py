@@ -42,7 +42,8 @@ DATASETS = set([
     'Tools_and_Home_Improvement',
     'Toys_and_Games',
     'Video_Games', 
-    'Digital_Music_2023'
+    'Digital_Music_2023',
+    'pinterest20'
 ])
 ALIAS = {
     'amz-b': 'All_Beauty',

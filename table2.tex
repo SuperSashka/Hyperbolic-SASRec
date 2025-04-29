@@ -1,0 +1,44 @@
+\begin{table}[ht!]
+\centering
+\caption{Evaluation results and relative improvements for SASRec+ architecture}
+\begin{tabular}{lcccccc}
+ &  & HR@10 & MRR@10 & NDCG@10 & COV@10  \\
+\midrule
+\multirow{5}{*}{\rotatebox[origin=c]{90}{Arts}}  
+& SASRec+ & \textbf{0.074} & \textbf{0.040} & \textbf{0.048} & \textbf{0.338} \\
+& HypSASRec+ & 0.051 & 0.028 & 0.033 & 0.246 \\
+& SASRec+_man & 0.068 & 0.039 & 0.046 & 0.219 \\
+& SASRec+ vs best  & +0\% & +0\% & +0\% & +0\% \\
+& SASRec vs best  & +27\% & +38\% & +34\% & +-49\% \\
+\midrule
+\multirow{5}{*}{\rotatebox[origin=c]{90}{Digital}}  
+& SASRec+ & 0.061 & 0.028 & 0.035 & 0.506 \\
+& HypSASRec+ & 0.059 & 0.028 & 0.035 & \textbf{0.541} \\
+& SASRec+_man & \textbf{0.063} & \textbf{0.028} & \textbf{0.036} & 0.466 \\
+& SASRec+ vs best  & +3\% & +0\% & +1\% & +7\% \\
+& SASRec vs best  & +44\% & +41\% & +42\% & +-10\% \\
+\midrule
+\multirow{5}{*}{\rotatebox[origin=c]{90}{Luxury}}  
+& SASRec+ & 0.131 & 0.067 & 0.082 & 0.563 \\
+& HypSASRec+ & 0.132 & 0.064 & 0.080 & \textbf{0.589} \\
+& SASRec+_man & \textbf{0.138} & \textbf{0.073} & \textbf{0.088} & 0.391 \\
+& SASRec+ vs best  & +5\% & +8\% & +7\% & +5\% \\
+& SASRec vs best  & +12\% & +16\% & +15\% & +13\% \\
+\midrule
+\multirow{5}{*}{\rotatebox[origin=c]{90}{MovieLens}}  
+& SASRec+ & 0.168 & 0.063 & 0.087 & \textbf{0.787} \\
+& HypSASRec+ & 0.169 & 0.063 & 0.088 & 0.751 \\
+& SASRec+_man & \textbf{0.169} & \textbf{0.064} & \textbf{0.088} & 0.686 \\
+& SASRec+ vs best  & +1\% & +2\% & +2\% & +0\% \\
+& SASRec vs best  & +10\% & +14\% & +12\% & +18\% \\
+\midrule
+\multirow{5}{*}{\rotatebox[origin=c]{90}{Office}}  
+& SASRec+ & \textbf{0.097} & \textbf{0.063} & \textbf{0.071} & \textbf{0.298} \\
+& HypSASRec+ & 0.000 & 0.000 & 0.000 & 0.000 \\
+& SASRec+_man & 0.000 & 0.000 & 0.000 & 0.000 \\
+& SASRec+ vs best  & +0\% & +0\% & +0\% & +0\% \\
+& SASRec vs best  & +84\% & +134\% & +115\% & +-41\% \\
+\midrule
+\end{tabular}
+\label{tab:sasrec_plus_results}
+\end{table}
