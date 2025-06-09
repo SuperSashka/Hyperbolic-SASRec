@@ -16,7 +16,7 @@ def generate_config(trial: optuna.Trial) -> dict:
         batch_quota=None,
         seed=0,
         sampler_seed=789,
-        device="cuda",
+        device="cpu",
         max_epochs=400,
         c=0.015283691692054992, # obtained from SVD embeddings at 1e^{-12} tolerance
         geom = 'ball',

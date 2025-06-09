@@ -38,7 +38,7 @@ def seq_euclidean_dist(eseq1, eseq2, single_dist):
     return eseq_dist
 
 
-def pairseq_dist_affinity(seq, single_dist, chunk_size=64):
+def pairseq_dist_affinity(seq, single_dist, chunk_size=64, return_dist=False):
     """
     Compute the pairwise sequence distance affinity matrix in chunks.
     seq: (batch_size, num_items, emb_dim)
@@ -47,6 +47,7 @@ def pairseq_dist_affinity(seq, single_dist, chunk_size=64):
     """
     batch_size = seq.shape[0]
     affinity = torch.empty(batch_size, batch_size, device=seq.device)
+    dist = torch.empty(batch_size, batch_size, device=seq.device)
     
     for i in range(0, batch_size, chunk_size):
         seq_chunk = seq[i:i+chunk_size]  # (chunk_size, num_items, emb_dim)
@@ -56,9 +57,14 @@ def pairseq_dist_affinity(seq, single_dist, chunk_size=64):
         
         # Compute distance: returns (chunk_size, batch_size)
         chunk_dist = seq_euclidean_dist(seq_chunk_exp, seq_all, single_dist)
+        dist[i:i+chunk_size] = chunk_dist
         affinity[i:i+chunk_size] = torch.exp(-chunk_dist ** 2)
     
-    return affinity
+    
+    if return_dist:
+        return dist,affinity
+    else:
+        return affinity
 
 
 def project_embeddings(embeddings, c=1.0, eps=1e-5):
