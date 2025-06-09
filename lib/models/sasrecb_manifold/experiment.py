@@ -1,3 +1,5 @@
+import os
+
 from functools import partial
 
 import numpy as np
@@ -37,6 +39,7 @@ class SASRecCEModel(RecommenderModel):
         self.batch_size = None
         self.gradient_accumulation_steps = None
         self.set_batch_size()
+        self.epoch_n = 0
 
     def set_batch_size(self):
         quota = self.config.get('batch_quota', None)
@@ -79,6 +82,11 @@ class SASRecCEModel(RecommenderModel):
 
         single_dist = lambda u,v: hyperbolic_dist(u,v, c = self.config['c'])
 
+        try:
+            dump_distance_graph = self.config['dump_distance_graph']
+        except Exception:
+            dump_distance_graph = False
+
         for index in range(n_batches):
             _, inputs, target, _ = next(sampler)
             # convert batch data into torch tensors
@@ -108,7 +116,10 @@ class SASRecCEModel(RecommenderModel):
 
                     inp_eseq = model.item_emb(inp_sub.detach())
 
-                    affinity = pairseq_dist_affinity(inp_eseq,single_dist)
+                    if dump_distance_graph:
+                        dist,affinity = pairseq_dist_affinity(inp_eseq,single_dist,return_dist=True)
+                    else:
+                        affinity = pairseq_dist_affinity(inp_eseq,single_dist)
 
                     logits_man =  logits[:,:,idx_samples]
 
@@ -117,6 +128,16 @@ class SASRecCEModel(RecommenderModel):
                     lap = affinity*logits_dist
 
                     man_reg = lap.sum()
+
+                if dump_distance_graph:
+
+                    dump_dir = 'exp_{}_dists'.format(self.config['dump_exp_name'])
+
+                    if not os.path.exists(dump_dir): os.mkdir(dump_dir)
+
+                    with torch.no_grad():
+                        torch.save(affinity, f'{dump_dir}/aff_{self.epoch_n}_{index}.pt')
+                        torch.save(dist, f'{dump_dir}/dist_{self.epoch_n}_{index}.pt')
                
             else:
                 man_reg=torch.tensor(0)
@@ -136,6 +157,8 @@ class SASRecCEModel(RecommenderModel):
                 optimizer.step()
                 optimizer.zero_grad()
                 loss += batch_loss.item()
+
+        self.epoch_n+=1
 
 
 
