@@ -1,4 +1,6 @@
-﻿from functools import partial
+﻿import os
+
+from functools import partial
 from math import exp
 
 import numpy as np
@@ -67,6 +69,10 @@ class SASRecModel(RecommenderModel):
 
         #clean_dist = lambda u,v: hyperbolic_dist(u,v, c = 1.0) 
 
+        try:
+            dump_distance_graph = self.config['dump_distance_graph']
+        except Exception:
+            dump_distance_graph = False
 
         for batch_number in range(n_batches):
             _, *seq_data = next(sampler)
@@ -98,7 +104,13 @@ class SASRecModel(RecommenderModel):
 
                     pos_eseq = model.item_emb(pos_sub.detach())
 
-                    pos_dist,pos_affinity = pairseq_dist_affinity(pos_eseq,single_dist,return_dist=True)
+                    if dump_distance_graph:
+                        
+                        pos_dist,pos_affinity = pairseq_dist_affinity(pos_eseq,single_dist,return_dist=True)
+
+                    else:
+
+                        pos_affinity = pairseq_dist_affinity(pos_eseq,single_dist)
 
                     pos_logits_dist = torch.cdist(pos_logits,pos_logits)**2
 
@@ -121,7 +133,13 @@ class SASRecModel(RecommenderModel):
 
                     neg_eseq = model.item_emb(neg_sub.detach())
 
-                    neg_dist,neg_affinity = pairseq_dist_affinity(neg_eseq,single_dist,return_dist=True)
+                    if dump_distance_graph:
+                        
+                        neg_dist,neg_affinity = pairseq_dist_affinity(pos_eseq,single_dist,return_dist=True)
+
+                    else:
+
+                        neg_affinity = pairseq_dist_affinity(pos_eseq,single_dist)
 
                     neg_logits_dist = torch.cdist(neg_logits,neg_logits)**2
 
@@ -132,35 +150,18 @@ class SASRecModel(RecommenderModel):
             else:
                 neg_man_reg=torch.tensor(0)
 
-            dist_log_file = 'affinity_distances_log.txt'
 
-            with torch.no_grad():
-                pos_aff_mean = torch.mean(pos_affinity[pos_affinity!=1]).item()
-                pos_aff_var = torch.var(pos_affinity[pos_affinity!=1]).item()
-                neg_aff_mean = torch.mean(neg_affinity[neg_affinity!=1]).item()
-                neg_aff_var = torch.var(neg_affinity[neg_affinity!=1]).item()
+            if dump_distance_graph:
 
-                d_pos_mean = torch.mean(pos_dist[pos_dist>0]).item()
-                d_pos_var = torch.var(pos_dist[pos_dist>0]).item()
-                d_neg_mean = torch.mean(neg_dist[neg_dist>0]).item()
-                d_neg_var = torch.var(neg_dist[neg_dist>0]).item()
+                dump_dir = 'exp_{}_dists'.format(self.config['dump_exp_name'])
 
-                line1 = 'epoch = {} batch = {} affinities pos = {:.4f} ± {:.4f} neg = {:.4f} ± {:.4f}'.format(self.epoch_n,
-                    batch_number, pos_aff_mean, pos_aff_var, neg_aff_mean, neg_aff_var)
-                line2 = 'epoch = {} batch = {} distances pos = {:.4f} ± {:.4f} neg = {:.4f} ± {:.4f}'.format(self.epoch_n,
-                    batch_number, d_pos_mean, d_pos_var, d_neg_mean, d_neg_var)
+                if not os.path.exists(dump_dir): os.mkdir(dump_dir)
 
-                print(line1)
-                print(line2)
-
-                with open(dist_log_file, 'a') as f:
-                    f.write(line1 + '\n')
-                    f.write(line2 + '\n')
-
-                torch.save(pos_affinity, f'saved_tensors/p_aff_{self.epoch_n}_{batch_number}.pt')
-                torch.save(pos_dist, f'saved_tensors/p_dist_{self.epoch_n}_{batch_number}.pt')
-                torch.save(neg_affinity, f'saved_tensors/n_aff_{self.epoch_n}_{batch_number}.pt')
-                torch.save(neg_dist, f'saved_tensors/n_dist_{self.epoch_n}_{batch_number}.pt')
+                with torch.no_grad():
+                    torch.save(pos_affinity, f'{dump_dir}/p_aff_{self.epoch_n}_{batch_number}.pt')
+                    torch.save(pos_dist, f'{dump_dir}/p_dist_{self.epoch_n}_{batch_number}.pt')
+                    torch.save(neg_affinity, f'{dump_dir}/n_aff_{self.epoch_n}_{batch_number}.pt')
+                    torch.save(neg_dist, f'{dump_dir}/n_dist_{self.epoch_n}_{batch_number}.pt')
 
             if pos_lambda_man_reg > 0:
                 batch_loss += pos_lambda_man_reg*pos_man_reg

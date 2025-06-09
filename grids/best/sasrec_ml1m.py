@@ -25,7 +25,9 @@ def generate_config(trial: optuna.Trial) -> dict:
         pos_lambda_reg = 1e-06,
         neg_lambda_reg = 0.001,
         geometry_c = 0.015283691692054992,
-        lambda_reg = 1e-7
+        lambda_reg = 1e-7,
+        dump_distance_graph = True,
+        dump_exp_name = 'ML1M'
     )
     config = generate_best_config(fixed_params)
     return config
